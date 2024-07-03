@@ -1,5 +1,6 @@
 package com.rid.v1.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class Sensor {
     @Column
     private String location;
 
+    @JsonIgnore
     @OneToMany( mappedBy ="sensor", cascade = CascadeType.ALL)
     private List<SensorReading> readings;
 

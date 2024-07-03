@@ -1,5 +1,6 @@
 package com.rid.v1.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,7 +15,7 @@ public class SensorReading {
     @Column
     private String readingType;
     @Column
-    private String readingValue;
+    private double readingValue;
     @Column
     private String readingDate;
     @Column
@@ -22,6 +23,7 @@ public class SensorReading {
     @Column
     private String time;
 
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name="sensor_id")
     private Sensor sensor;
@@ -48,11 +50,11 @@ public class SensorReading {
         this.readingType = readingType;
     }
 
-    public String getReadingValue() {
+    public double getReadingValue() {
         return readingValue;
     }
 
-    public void setReadingValue(String readingValue) {
+    public void setReadingValue(double readingValue) {
         this.readingValue = readingValue;
     }
 

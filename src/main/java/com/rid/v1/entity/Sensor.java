@@ -12,7 +12,7 @@ public class Sensor {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int sensorId;
 
     @Column
     private String type;
@@ -28,12 +28,20 @@ public class Sensor {
     @OneToMany( mappedBy ="sensor", cascade = CascadeType.ALL)
     private List<SensorReading> readings;
 
-    public int getId() {
-        return id;
+    public int getSensorId() {
+        return sensorId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setSensorId(int sensorId) {
+        this.sensorId = sensorId;
+    }
+
+    public List<SensorReading> getReadings() {
+        return readings;
+    }
+
+    public void setReadings(List<SensorReading> readings) {
+        this.readings = readings;
     }
 
     public String getType() {

@@ -25,8 +25,8 @@ public class Sensor {
     @Column
     private String location;
 
-    @OneToMany(mappedBy = "sensor",cascade = CascadeType.ALL)
-    private List<SensorReading> Readings=new ArrayList<>();
+    @OneToMany( mappedBy ="sensor", cascade = CascadeType.ALL)
+    private List<SensorReading> readings;
 
     public int getId() {
         return id;
@@ -76,11 +76,5 @@ public class Sensor {
         this.location = location;
     }
 
-    public List<SensorReading> getReadings() {
-        return Readings;
-    }
 
-    public void setReadings(List<SensorReading> readings) {
-        Readings = readings;
-    }
 }

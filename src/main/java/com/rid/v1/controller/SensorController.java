@@ -15,17 +15,17 @@ public class SensorController {
     @Autowired
     private SensorRepository sensorRepository;
 
-@GetMapping("/all")
-@ResponseBody
-public List<Sensor> getSensors() {
-    return sensorRepository.findAll();
-}
+    @GetMapping("/all")
+    @ResponseBody
+    public List<Sensor> getSensors() {
+        return sensorRepository.findAll();
+    }
 
-@GetMapping("{sensor_id}")
-@ResponseBody
-public Sensor getSensor(@PathVariable int sensor_id) {
-    Optional<Sensor>  sensor = sensorRepository.findById(sensor_id);
-    return sensor.orElse(null);
-}
+    @GetMapping("{sensor_id}")
+    @ResponseBody
+    public Sensor getSensor(@PathVariable int sensor_id) {
+        Optional<Sensor>  sensor = sensorRepository.findById(sensor_id);
+        return sensor.orElse(null);
+    }
 
 }

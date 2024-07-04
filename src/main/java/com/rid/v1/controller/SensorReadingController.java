@@ -46,7 +46,7 @@ public class SensorReadingController {
     }
 
     @GetMapping("/search")
-    public List<SensorReading> SearchSensorReadings(@RequestParam String type, @RequestParam String location,@RequestParam String time) {
+    public List<SensorReading> SearchSensorReadings(@RequestParam(required = false) String type, @RequestParam(required = false) String location,@RequestParam(required = false) String time) {
 
 
         return null;

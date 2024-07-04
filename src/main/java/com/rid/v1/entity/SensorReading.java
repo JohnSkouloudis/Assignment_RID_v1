@@ -3,6 +3,9 @@ package com.rid.v1.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 @Entity
 @Table (name="readings")
 public class SensorReading {
@@ -17,11 +20,11 @@ public class SensorReading {
     @Column
     private double readingValue;
     @Column
-    private String readingDate;
+    private LocalDate readingDate;
     @Column
     private String description;
     @Column
-    private String time;
+    private LocalTime time;
 
     @JsonIgnore
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -65,11 +68,11 @@ public class SensorReading {
         this.readingValue = readingValue;
     }
 
-    public String getReadingDate() {
+    public LocalDate getReadingDate() {
         return readingDate;
     }
 
-    public void setReadingDate(String readingDate) {
+    public void setReadingDate(LocalDate readingDate) {
         this.readingDate = readingDate;
     }
 
@@ -81,11 +84,11 @@ public class SensorReading {
         this.description = description;
     }
 
-    public String getTime() {
+    public LocalTime getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalTime time) {
         this.time = time;
     }
 }

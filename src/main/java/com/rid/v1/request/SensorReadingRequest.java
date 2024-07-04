@@ -1,16 +1,20 @@
 package com.rid.v1.request;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 public class SensorReadingRequest {
 
     private String readingType;
 
     private double readingValue;
 
-    private String readingDate;
+    private LocalDate readingDate;
 
     private String description;
 
-    private String time;
+    private LocalTime time;
 
 
 
@@ -30,12 +34,20 @@ public class SensorReadingRequest {
         this.readingValue = readingValue;
     }
 
-    public String getReadingDate() {
+    public LocalDate getReadingDate() {
         return readingDate;
     }
 
-    public void setReadingDate(String readingDate) {
+    public void setReadingDate(LocalDate readingDate) {
         this.readingDate = readingDate;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 
     public String getDescription() {
@@ -46,11 +58,5 @@ public class SensorReadingRequest {
         this.description = description;
     }
 
-    public String getTime() {
-        return time;
-    }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
 }

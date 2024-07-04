@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/sensorreadings")
 public class SensorReadingController {
@@ -43,5 +45,11 @@ public class SensorReadingController {
 
     }
 
+    @GetMapping("/search")
+    public List<SensorReading> SearchSensorReadings(@RequestParam String type, @RequestParam String location,@RequestParam String time) {
+
+
+        return null;
+    }
 
 }

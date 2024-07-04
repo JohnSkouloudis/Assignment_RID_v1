@@ -19,7 +19,7 @@ public interface SensorReadingRepository extends JpaRepository<SensorReading,Int
     @Query(value = "select * from readings where sensor_id = :sensorId order by reading_value asc limit 10", nativeQuery = true)
     List<SensorReading> find10MinReadingValuesBySensorId(@Param("sensorId") int sensorId);
 
-    @Query(value = "SELECT AVG(reading_value) from readings where sensor_id =: sensorId",nativeQuery = true)
-    double findMeanOfReadingValueBySensorId(@Param("sensorId") int sensorId);
+    @Query(value = "SELECT AVG(reading_value) from readings where sensor_id =:sensorId",nativeQuery = true)
+    Double findMeanOfReadingValueBySensorId(@Param("sensorId") int sensorId);
 
 }

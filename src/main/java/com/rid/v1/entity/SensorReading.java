@@ -33,6 +33,13 @@ public class SensorReading {
 
     }
 
+    public Sensor getSensor() {
+        return sensor;
+    }
+
+    public void setSensor(Sensor sensor) {
+        this.sensor = sensor;
+    }
 
     public int getId() {
         return id;

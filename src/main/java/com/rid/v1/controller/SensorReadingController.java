@@ -9,6 +9,9 @@ import com.rid.v1.repository.SensorReadingRepository;
 import com.rid.v1.repository.SensorRepository;
 import com.rid.v1.response.SensorReadingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,9 +55,11 @@ public class SensorReadingController {
     }
 
     @GetMapping("/search")
-    public SensorReadingResponse SearchSensorReadings(@RequestParam(required = false) String type, @RequestParam(required = false) String location, @RequestParam(required = false) LocalTime time) {
+    public Page<SensorReadingResponse> SearchSensorReadings(@RequestParam int page, @RequestParam(required = false) String type, @RequestParam(required = false) String location, @RequestParam(required = false) LocalTime time) {
 
-        List<SensorReadingDTO> sensorReadings = sensorReadingRepository.findSensorReadingBySensor(type, location, time);
+        Pageable pageable = PageRequest.of(page,10);
+
+        Page<SensorReadingDTO> sensorReadings = sensorReadingRepository.findSensorReadingBySensor(type, location, time,pageable);
 
         List<Double> maxValues =sensorReadingRepository.find10MaxReadingValuesBySensor(type, location, time);
         List<Double> minValues =sensorReadingRepository.find10MinReadingValuesBySensor(type, location, time);

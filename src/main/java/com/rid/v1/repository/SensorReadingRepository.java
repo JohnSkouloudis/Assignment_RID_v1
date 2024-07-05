@@ -3,6 +3,8 @@ package com.rid.v1.repository;
 import com.rid.v1.entity.SensorReadingDTO;
 import com.rid.v1.entity.SensorReading;
 import io.swagger.v3.oas.annotations.Hidden;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -28,9 +30,10 @@ public interface SensorReadingRepository extends JpaRepository<SensorReading,Int
                    "WHERE (:type IS NULL OR s.type = :type) " +
                    "AND (:location IS NULL OR s.location = :location) " +
                    "AND (:time IS NULL OR sr.time = :time)",nativeQuery = true)
-    List<SensorReadingDTO> findSensorReadingBySensor(@Param("type") String type,
+    Page<SensorReadingDTO> findSensorReadingBySensor(@Param("type") String type,
                                                      @Param("location")String location,
-                                                     @Param("time") LocalTime time);
+                                                     @Param("time") LocalTime time,
+                                                     Pageable pageable);
 
     @Query(value = "Select sr.reading_value from readings sr join sensors s on sr.sensor_id=s.sensor_id "+
             "WHERE (:type IS NULL OR s.type = :type) " +

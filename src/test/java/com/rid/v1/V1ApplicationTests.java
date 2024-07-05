@@ -13,7 +13,6 @@ class V1ApplicationTests {
     @Test
     public void TestGetSensorMetrics() throws Error, Exception {
 
-
     }
 
 

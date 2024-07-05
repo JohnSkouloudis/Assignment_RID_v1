@@ -1,15 +1,21 @@
 package com.rid.v1.controller;
 
+import com.rid.v1.entity.Metrics;
+import com.rid.v1.entity.SensorReadingDTO;
 import com.rid.v1.response.MessageResponse;
 import com.rid.v1.request.SensorReadingRequest;
 import com.rid.v1.entity.SensorReading;
 import com.rid.v1.repository.SensorReadingRepository;
 import com.rid.v1.repository.SensorRepository;
+import com.rid.v1.response.SensorReadingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalTime;
+import java.util.Collections;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/sensorreadings")
@@ -46,10 +52,31 @@ public class SensorReadingController {
     }
 
     @GetMapping("/search")
-    public List<SensorReading> SearchSensorReadings(@RequestParam(required = false) String type, @RequestParam(required = false) String location,@RequestParam(required = false) String time) {
+    public SensorReadingResponse SearchSensorReadings(@RequestParam(required = false) String type, @RequestParam(required = false) String location, @RequestParam(required = false) LocalTime time) {
+
+        List<SensorReadingDTO> sensorReadings = sensorReadingRepository.findSensorReadingBySensor(type, location, time);
+
+        List<Double> maxValues =sensorReadingRepository.find10MaxReadingValuesBySensor(type, location, time);
+        List<Double> minValues =sensorReadingRepository.find10MinReadingValuesBySensor(type, location, time);
 
 
-        return null;
+
+        double mean=0;
+        for (SensorReadingDTO sensorReading : sensorReadings) {
+            mean+=sensorReading.getReadingValue();
+        }
+        mean /= sensorReadings.size();
+
+        double valueRange= Collections.max(maxValues) - Collections.min(minValues);
+
+        Metrics metrics = new Metrics(valueRange,mean,maxValues,minValues);
+
+        SensorReadingResponse response = new SensorReadingResponse(sensorReadings,metrics);
+
+        return response;
+
     }
+
+
 
 }

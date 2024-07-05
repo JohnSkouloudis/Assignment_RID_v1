@@ -1,6 +1,6 @@
 package com.rid.v1.response;
 
-import java.util.List;
+import com.rid.v1.entity.Metrics;
 
 public class SensorResponse {
 
@@ -14,24 +14,15 @@ public class SensorResponse {
 
     private String location;
 
-    private double meanValue;
+    Metrics metrics;
 
-    private List<Double> maxValues;
-
-    private List<Double> minValues;
-
-    private double valueRange;
-
-    public SensorResponse(String type, String vendorName, String vendorEmail, String description, String location, double meanValue, List<Double> maxValues, List<Double> minValues,  double valueRange) {
+    public SensorResponse(String type, String vendorName, String vendorEmail, String description, String location,Metrics metrics) {
         this.type = type;
         this.vendorName = vendorName;
         this.vendorEmail = vendorEmail;
         this.description = description;
         this.location = location;
-        this.meanValue = meanValue;
-        this.maxValues = maxValues;
-        this.minValues = minValues;
-        this.valueRange = valueRange;
+        this.metrics=metrics;
     }
 
     public String getType() {
@@ -74,35 +65,11 @@ public class SensorResponse {
         this.location = location;
     }
 
-    public double getMeanValue() {
-        return meanValue;
+    public Metrics getMetrics() {
+        return metrics;
     }
 
-    public void setMeanValue(double meanValue) {
-        this.meanValue = meanValue;
-    }
-
-    public List<Double> getMaxValues() {
-        return maxValues;
-    }
-
-    public void setMaxValues(List<Double> maxValues) {
-        this.maxValues = maxValues;
-    }
-
-    public List<Double> getMinValues() {
-        return minValues;
-    }
-
-    public void setMinValues(List<Double> minValues) {
-        this.minValues = minValues;
-    }
-
-    public double getValueRange() {
-        return valueRange;
-    }
-
-    public void setValueRange(double valueRange) {
-        this.valueRange = valueRange;
+    public void setMetrics(Metrics metrics) {
+        this.metrics = metrics;
     }
 }

@@ -1,5 +1,6 @@
 package com.rid.v1.controller;
 
+import com.rid.v1.entity.Metrics;
 import com.rid.v1.entity.SensorReading;
 import com.rid.v1.repository.SensorReadingRepository;
 import com.rid.v1.response.MessageResponse;
@@ -8,6 +9,9 @@ import com.rid.v1.entity.Sensor;
 import com.rid.v1.repository.SensorRepository;
 import com.rid.v1.response.SensorResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +31,9 @@ public class SensorController {
 
     @GetMapping("/all")
     @ResponseBody
-    public List<Sensor> getSensors() {
-        return sensorRepository.findAll();
+    public Page<Sensor> getSensors(@RequestParam int page) {
+        Pageable pageable = PageRequest.of(page,10);
+        return sensorRepository.findAll(pageable);
     }
 
     @GetMapping("{sensor_id}")
@@ -59,27 +64,37 @@ public class SensorController {
 
         Sensor sensor = sensorRepository.findById(sensor_id).get();
 
-        double meanValue = sensorReadingRepository.findMeanOfReadingValueBySensorId(sensor_id);
 
-        List<SensorReading> maxSensorReadings = sensorReadingRepository.find10MaxReadingValuesBySensorId(sensor_id);
-        List<SensorReading> minSensorReadings = sensorReadingRepository.find10MinReadingValuesBySensorId(sensor_id);
-
-        List<Double> maxValues = new ArrayList<>();
-        List<Double> minValues = new ArrayList<>();
-
-        for (SensorReading sensorReading : maxSensorReadings ) {
-            maxValues.add(sensorReading.getReadingValue());
+        if(sensor == null  || sensorReadingRepository.findMeanOfReadingValueBySensorId(sensor_id)==null) {
+            return null;
         }
 
-        for (SensorReading sensorReading : minSensorReadings ) {
-            minValues.add(sensorReading.getReadingValue());
-        }
 
-        double valueRange= Collections.max(maxValues) - Collections.min(minValues);
+            Double meanValue = sensorReadingRepository.findMeanOfReadingValueBySensorId(sensor_id);
 
-        SensorResponse sensorResponse = new SensorResponse(sensor.getType(),sensor.getVendorName(),sensor.getVendorEmail()
-                ,sensor.getDescription()
-                ,sensor.getLocation(),meanValue,maxValues,minValues,valueRange);
+
+            List<SensorReading> maxSensorReadings = sensorReadingRepository.find10MaxReadingValuesBySensorId(sensor_id);
+            List<SensorReading> minSensorReadings = sensorReadingRepository.find10MinReadingValuesBySensorId(sensor_id);
+
+            List<Double> maxValues = new ArrayList<>();
+            List<Double> minValues = new ArrayList<>();
+
+            for (SensorReading sensorReading : maxSensorReadings) {
+                maxValues.add(sensorReading.getReadingValue());
+            }
+
+            for (SensorReading sensorReading : minSensorReadings) {
+                minValues.add(sensorReading.getReadingValue());
+            }
+
+            double valueRange = Collections.max(maxValues) - Collections.min(minValues);
+            Metrics metrics = new Metrics(valueRange,meanValue,maxValues,minValues);
+
+            SensorResponse sensorResponse = new SensorResponse(sensor.getType(), sensor.getVendorName(), sensor.getVendorEmail()
+                    , sensor.getDescription()
+                    , sensor.getLocation(), metrics);
+
+
 
         return sensorResponse;
 

@@ -8,6 +8,7 @@ import com.rid.v1.entity.SensorReading;
 import com.rid.v1.repository.SensorReadingRepository;
 import com.rid.v1.repository.SensorRepository;
 import com.rid.v1.response.SensorReadingResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,6 +33,7 @@ public class SensorReadingController {
     @Autowired
     private SensorRepository sensorRepository;
 
+    @Operation(summary = "add a new sensor reading to the database")
     @PostMapping("/new/{sensorId}")
     public ResponseEntity<?> addSensorReading(@RequestBody SensorReadingRequest sensorReadingRequest, @PathVariable int sensorId) {
 
@@ -58,7 +60,7 @@ public class SensorReadingController {
     }
 
 
-
+    @Operation(summary = "search sensor reading based on location,time and sensor type")
     @GetMapping("/search")
     public SensorReadingResponse SearchSensorReadings(@RequestParam int page, @RequestParam(required = false) String type, @RequestParam(required = false) String location, @RequestParam(required = false) String time) {
 

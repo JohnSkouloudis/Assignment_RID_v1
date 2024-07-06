@@ -8,6 +8,7 @@ import com.rid.v1.request.SensorRequest;
 import com.rid.v1.entity.Sensor;
 import com.rid.v1.repository.SensorRepository;
 import com.rid.v1.response.SensorResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,6 +30,7 @@ public class SensorController {
     @Autowired
     private SensorReadingRepository sensorReadingRepository;
 
+    @Operation(summary = "get all available sensors")
     @GetMapping("/all")
     @ResponseBody
     public Page<Sensor> getSensors(@RequestParam int page) {
@@ -36,6 +38,7 @@ public class SensorController {
         return sensorRepository.findAll(pageable);
     }
 
+    @Operation(summary = "get a sensors info")
     @GetMapping("{sensor_id}")
     @ResponseBody
     public Sensor getSensor(@PathVariable int sensor_id) {
@@ -43,6 +46,7 @@ public class SensorController {
         return sensor.orElse(null);
     }
 
+    @Operation(summary = "add a sensor to the database")
     @PostMapping("/new")
     public ResponseEntity<?> addSensor(@RequestBody SensorRequest sensorRequest) {
         Sensor sensor = new Sensor();
@@ -58,6 +62,7 @@ public class SensorController {
 
     }
 
+    @Operation(summary = "get a sensors metrics")
     @GetMapping("/metrics/{sensor_id}")
     @ResponseBody
     public SensorResponse getSensorMetrics(@PathVariable int sensor_id) {

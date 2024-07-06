@@ -20,17 +20,25 @@ public class SensorReading {
     @Column
     private double readingValue;
     @Column
-    private LocalDate readingDate;
+    private String readingDate;
     @Column
     private String description;
     @Column
-    private LocalTime time;
+    private String time;
 
     @JsonIgnore
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name="sensor_id")
     private Sensor sensor;
 
+    public SensorReading(String readingType, double readingValue, String readingDate, String description, String time) {
+        this.readingType = readingType;
+        this.readingValue = readingValue;
+        this.readingDate = readingDate;
+        this.description = description;
+        this.time = time;
+
+    }
 
     public SensorReading() {
 
@@ -68,11 +76,11 @@ public class SensorReading {
         this.readingValue = readingValue;
     }
 
-    public LocalDate getReadingDate() {
+    public String getReadingDate() {
         return readingDate;
     }
 
-    public void setReadingDate(LocalDate readingDate) {
+    public void setReadingDate(String readingDate) {
         this.readingDate = readingDate;
     }
 
@@ -84,11 +92,11 @@ public class SensorReading {
         this.description = description;
     }
 
-    public LocalTime getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }

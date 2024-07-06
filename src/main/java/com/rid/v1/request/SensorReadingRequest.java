@@ -10,11 +10,11 @@ public class SensorReadingRequest {
 
     private double readingValue;
 
-    private LocalDate readingDate;
+    private String readingDate;
 
     private String description;
 
-    private LocalTime time;
+    private String time;
 
 
 
@@ -34,19 +34,19 @@ public class SensorReadingRequest {
         this.readingValue = readingValue;
     }
 
-    public LocalDate getReadingDate() {
+    public String getReadingDate() {
         return readingDate;
     }
 
-    public void setReadingDate(LocalDate readingDate) {
+    public void setReadingDate(String readingDate) {
         this.readingDate = readingDate;
     }
 
-    public LocalTime getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

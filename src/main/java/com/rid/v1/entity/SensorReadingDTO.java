@@ -6,14 +6,20 @@ import java.time.LocalTime;
 public class SensorReadingDTO {
 
     private String description;
-    private LocalDate readingDate;
+    private String readingDate;
     private String readingType;
     private double readingValue;
-    private LocalTime time;
-
+    private String time;
 
     public SensorReadingDTO() {
+    }
 
+    public SensorReadingDTO(String description, String readingDate, String readingType, double readingValue, String time) {
+        this.description = description;
+        this.readingDate = readingDate;
+        this.readingType = readingType;
+        this.readingValue = readingValue;
+        this.time = time;
     }
 
     public String getDescription() {
@@ -24,11 +30,11 @@ public class SensorReadingDTO {
         this.description = description;
     }
 
-    public LocalDate getReadingDate() {
+    public String getReadingDate() {
         return readingDate;
     }
 
-    public void setReadingDate(LocalDate readingDate) {
+    public void setReadingDate(String readingDate) {
         this.readingDate = readingDate;
     }
 
@@ -48,11 +54,11 @@ public class SensorReadingDTO {
         this.readingValue = readingValue;
     }
 
-    public LocalTime getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }

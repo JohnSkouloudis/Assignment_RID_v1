@@ -30,6 +30,17 @@ public class Sensor {
     @OneToMany( mappedBy ="sensor", cascade = CascadeType.ALL)
     private List<SensorReading> readings;
 
+    public Sensor(String type, String vendorName, String vendorEmail, String description, String location) {
+        this.type = type;
+        this.vendorName = vendorName;
+        this.vendorEmail = vendorEmail;
+        this.description = description;
+        this.location = location;
+    }
+
+    public Sensor() {
+    }
+
     public int getSensorId() {
         return sensorId;
     }

@@ -30,9 +30,9 @@ public interface SensorReadingRepository extends JpaRepository<SensorReading,Int
                    "WHERE (:type IS NULL OR s.type = :type) " +
                    "AND (:location IS NULL OR s.location = :location) " +
                    "AND (:time IS NULL OR sr.time = :time)",nativeQuery = true)
-    Page<SensorReadingDTO> findSensorReadingBySensor(@Param("type") String type,
+    List<Object[]> findSensorReadingBySensor(@Param("type") String type,
                                                      @Param("location")String location,
-                                                     @Param("time") LocalTime time,
+                                                     @Param("time") String time,
                                                      Pageable pageable);
 
     @Query(value = "Select sr.reading_value from readings sr join sensors s on sr.sensor_id=s.sensor_id "+
@@ -42,7 +42,8 @@ public interface SensorReadingRepository extends JpaRepository<SensorReading,Int
             "order by sr.reading_value desc limit 10",nativeQuery = true)
     List<Double> find10MaxReadingValuesBySensor(@Param("type") String type,
                                                 @Param("location")String location,
-                                                @Param("time") LocalTime time);
+                                                @Param("time") String time,
+                                                Pageable pageable);
 
     @Query(value = "Select sr.reading_value from readings sr join sensors s on sr.sensor_id=s.sensor_id "+
             "WHERE (:type IS NULL OR s.type = :type) " +
@@ -51,5 +52,6 @@ public interface SensorReadingRepository extends JpaRepository<SensorReading,Int
             "order by sr.reading_value asc limit 10",nativeQuery = true)
     List<Double> find10MinReadingValuesBySensor(@Param("type") String type,
                                                 @Param("location")String location,
-                                                @Param("time") LocalTime time);
+                                                @Param("time") String time,
+                                                Pageable pageable);
 }

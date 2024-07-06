@@ -2,7 +2,9 @@ package com.rid.v1.response;
 
 
 import com.rid.v1.entity.Metrics;
+import com.rid.v1.entity.SensorReading;
 import com.rid.v1.entity.SensorReadingDTO;
+import org.springframework.data.domain.Page;
 
 
 import java.util.List;

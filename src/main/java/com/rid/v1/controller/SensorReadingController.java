@@ -35,7 +35,7 @@ public class SensorReadingController {
 
     @Operation(summary = "add a new sensor reading to the database")
     @PostMapping("/new/{sensorId}")
-    public ResponseEntity<?> addSensorReading(@RequestBody SensorReadingRequest sensorReadingRequest, @PathVariable int sensorId) {
+    public ResponseEntity<MessageResponse> addSensorReading(@RequestBody SensorReadingRequest sensorReadingRequest, @PathVariable int sensorId) {
 
         if (sensorRepository.existsById(sensorId)) {
 

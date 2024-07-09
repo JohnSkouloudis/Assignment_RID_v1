@@ -48,7 +48,7 @@ public class SensorController {
 
     @Operation(summary = "add a sensor to the database")
     @PostMapping("/new")
-    public ResponseEntity<?> addSensor(@RequestBody SensorRequest sensorRequest) {
+    public ResponseEntity<MessageResponse> addSensor(@RequestBody SensorRequest sensorRequest) {
         Sensor sensor = new Sensor();
         sensor.setDescription(sensorRequest.getDescription());
         sensor.setType(sensorRequest.getType());

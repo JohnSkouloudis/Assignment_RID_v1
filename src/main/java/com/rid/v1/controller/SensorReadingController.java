@@ -68,6 +68,10 @@ public class SensorReadingController {
 
         List<Object[]> results = sensorReadingRepository.findSensorReadingBySensor(type, location, time,pageable);
 
+        if (results.isEmpty()){
+            return new SensorReadingResponse();
+        }
+
         List<SensorReadingDTO> sensorReadings= new ArrayList<>();
 
         for(Object[] result:results){

@@ -19,6 +19,10 @@ public class SensorReadingResponse {
         this.metrics = metrics;
     }
 
+    public SensorReadingResponse() {
+
+    }
+
     public List<SensorReadingDTO> getSensorReadings() {
         return sensorReadings;
     }

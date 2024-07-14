@@ -1,27 +1,26 @@
 package com.rid.v1.repository;
 
-import com.rid.v1.entity.SensorReadingDTO;
-import com.rid.v1.entity.SensorReading;
+import com.rid.v1.entity.Reading;
+import com.rid.v1.entity.Sensor;
 import io.swagger.v3.oas.annotations.Hidden;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalTime;
 import java.util.List;
 
 @Hidden
 @Repository
-public interface SensorReadingRepository extends JpaRepository<SensorReading,Integer> {
+public interface ReadingRepository extends JpaRepository<Reading,Integer> {
 
-    @Query(value = "select * from readings where sensor_id = :sensorId order by reading_value desc limit 10", nativeQuery = true)
-    List<SensorReading> find10MaxReadingValuesBySensorId(@Param("sensorId") int sensorId);
+    List<Reading> findBySensorOrderByReadingValueDesc(Sensor sensor, Pageable pageable);
 
-    @Query(value = "select * from readings where sensor_id = :sensorId order by reading_value asc limit 10", nativeQuery = true)
-    List<SensorReading> find10MinReadingValuesBySensorId(@Param("sensorId") int sensorId);
+    List<Reading> findBySensorOrderByReadingValueAsc(Sensor sensor, Pageable pageable);
+
+    List<Reading> findBySensor(Sensor sensor);
+
 
     @Query(value = "SELECT AVG(reading_value) from readings where sensor_id =:sensorId",nativeQuery = true)
     Double findMeanOfReadingValueBySensorId(@Param("sensorId") int sensorId);

@@ -1,23 +1,20 @@
 package com.rid.v1.controller;
 
 import com.rid.v1.entity.Metrics;
+import com.rid.v1.entity.Reading;
 import com.rid.v1.entity.SensorReadingDTO;
 import com.rid.v1.response.MessageResponse;
 import com.rid.v1.request.SensorReadingRequest;
-import com.rid.v1.entity.SensorReading;
-import com.rid.v1.repository.SensorReadingRepository;
+import com.rid.v1.repository.ReadingRepository;
 import com.rid.v1.repository.SensorRepository;
 import com.rid.v1.response.SensorReadingResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,10 +22,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/sensorreadings")
-public class SensorReadingController {
+public class ReadingController {
 
     @Autowired
-    private SensorReadingRepository sensorReadingRepository;
+    private ReadingRepository readingRepository;
 
     @Autowired
     private SensorRepository sensorRepository;
@@ -39,7 +36,7 @@ public class SensorReadingController {
 
         if (sensorRepository.existsById(sensorId)) {
 
-            SensorReading reading = new SensorReading();
+            Reading reading = new Reading();
 
             reading.setReadingDate( sensorReadingRequest.getReadingDate() );
             reading.setReadingType( sensorReadingRequest.getReadingType() );
@@ -49,7 +46,7 @@ public class SensorReadingController {
             reading.setTime(sensorReadingRequest.getTime());
             reading.setSensor(sensorRepository.findById(sensorId).get());
 
-            sensorReadingRepository.save(reading);
+            readingRepository.save(reading);
             return ResponseEntity.ok(new MessageResponse("Sensor Reading Added Successfully"));
 
         }else {
@@ -66,7 +63,7 @@ public class SensorReadingController {
 
         Pageable pageable = PageRequest.of(page,10);
 
-        List<Object[]> results = sensorReadingRepository.findSensorReadingBySensor(type, location, time,pageable);
+        List<Object[]> results = readingRepository.findSensorReadingBySensor(type, location, time,pageable);
 
         if (results.isEmpty()){
             return new SensorReadingResponse();

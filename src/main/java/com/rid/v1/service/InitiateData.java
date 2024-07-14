@@ -1,19 +1,14 @@
-package com.rid.v1;
+package com.rid.v1.service;
 
+import com.rid.v1.entity.Reading;
 import com.rid.v1.entity.Sensor;
-import com.rid.v1.entity.SensorReading;
-import com.rid.v1.repository.SensorReadingRepository;
+import com.rid.v1.repository.ReadingRepository;
 import com.rid.v1.repository.SensorRepository;
 import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -30,11 +25,11 @@ public class InitiateData {
 
 
     private final SensorRepository sensorRepository;
-    private final SensorReadingRepository sensorReadingRepository;
+    private final ReadingRepository readingRepository;
 
-    public InitiateData(SensorRepository sensorRepository, SensorReadingRepository sensorReadingRepository) {
+    public InitiateData(SensorRepository sensorRepository, ReadingRepository readingRepository) {
         this.sensorRepository = sensorRepository;
-        this.sensorReadingRepository = sensorReadingRepository;
+        this.readingRepository = readingRepository;
     }
 
 
@@ -57,10 +52,10 @@ public class InitiateData {
 
 
             Sensor sensor = this.sensorRepository.findById(random.nextInt(SENSOR_COUNT + 1)).get();
-            List<SensorReading> readings = new ArrayList<>();
+            List<Reading> readings = new ArrayList<>();
 
             for (int i = 1; i <= 11; i++) {
-                SensorReading reading = new SensorReading("readingType" + i, random.nextDouble() * 10
+                Reading reading = new Reading("readingType" + i, random.nextDouble() * 10
                         , "1/7/2024", "description" + i,
                         "13:4" + i);
 

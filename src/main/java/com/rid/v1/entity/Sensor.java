@@ -2,6 +2,7 @@ package com.rid.v1.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,27 +12,28 @@ import java.util.List;
 public class Sensor {
 
     @Id
-    @Column
+    @Column(name = "sensorId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int sensorId;
 
-    @Column
-    private String type;
-    @Column
+    @Column(name = "sensortype")
+    private String sensorType;
+    @Column(name="vendorname")
     private String vendorName;
-    @Column
+    @Column(name="vendoremail")
+    @Email
     private String vendorEmail;
-    @Column
+    @Column(name = "description")
     private String description;
-    @Column
+    @Column(name = "location")
     private String location;
 
     @JsonIgnore
     @OneToMany( mappedBy ="sensor", cascade = CascadeType.ALL)
-    private List<SensorReading> readings;
+    private List<Reading> readings;
 
-    public Sensor(String type, String vendorName, String vendorEmail, String description, String location) {
-        this.type = type;
+    public Sensor(String sensorType, String vendorName, String vendorEmail, String description, String location) {
+        this.sensorType = sensorType;
         this.vendorName = vendorName;
         this.vendorEmail = vendorEmail;
         this.description = description;
@@ -49,20 +51,20 @@ public class Sensor {
         this.sensorId = sensorId;
     }
 
-    public List<SensorReading> getReadings() {
+    public List<Reading> getReadings() {
         return readings;
     }
 
-    public void setReadings(List<SensorReading> readings) {
+    public void setReadings(List<Reading> readings) {
         this.readings = readings;
     }
 
-    public String getType() {
-        return type;
+    public String getSensorType() {
+        return sensorType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setSensorType(String sensorType) {
+        this.sensorType = sensorType;
     }
 
     public String getVendorName() {

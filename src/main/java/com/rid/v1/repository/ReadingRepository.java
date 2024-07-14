@@ -21,6 +21,8 @@ public interface ReadingRepository extends JpaRepository<Reading,Integer> {
 
     List<Reading> findBySensor(Sensor sensor);
 
+    boolean existsBySensor(Sensor sensor);
+
 
     @Query(value = "SELECT AVG(reading_value) from readings where sensor_id =:sensorId",nativeQuery = true)
     Double findMeanOfReadingValueBySensorId(@Param("sensorId") int sensorId);

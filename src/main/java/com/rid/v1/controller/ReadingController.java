@@ -21,8 +21,6 @@ import java.util.List;
 @RequestMapping("/api/readings")
 public class ReadingController {
 
-    @Autowired
-    private ReadingRepository readingRepository;
 
     @Autowired
     private SensorRepository sensorRepository;

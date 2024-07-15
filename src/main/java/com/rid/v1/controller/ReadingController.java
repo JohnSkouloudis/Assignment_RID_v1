@@ -8,6 +8,7 @@ import com.rid.v1.request.SensorReadingRequest;
 import com.rid.v1.repository.ReadingRepository;
 import com.rid.v1.repository.SensorRepository;
 import com.rid.v1.response.SensorReadingResponse;
+import com.rid.v1.service.ReadingService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -30,9 +31,18 @@ public class ReadingController {
     @Autowired
     private SensorRepository sensorRepository;
 
+    @Autowired
+    private ReadingService readingService;
+
+    @GetMapping("/{sensorId}")
+    public List<Reading> getReadings(@PathVariable int sensorId,@RequestParam int pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber, 10);
+        return readingService.getAllReadings(sensorId, pageable);
+    }
+
     @Operation(summary = "add a new sensor reading to the database")
     @PostMapping("/new/{sensorId}")
-    public ResponseEntity<MessageResponse> addSensorReading(@RequestBody SensorReadingRequest sensorReadingRequest, @PathVariable int sensorId) {
+    public ResponseEntity<MessageResponse> addReading(@RequestBody SensorReadingRequest sensorReadingRequest, @PathVariable int sensorId) {
 
         if (sensorRepository.existsById(sensorId)) {
 
@@ -59,7 +69,7 @@ public class ReadingController {
 
     @Operation(summary = "search sensor reading based on location,time and sensor type")
     @GetMapping("/search")
-    public SensorReadingResponse SearchSensorReadings(@RequestParam int page, @RequestParam(required = false) String type, @RequestParam(required = false) String location, @RequestParam(required = false) String time) {
+    public SensorReadingResponse SearchReadings(@RequestParam int page, @RequestParam(required = false) String type, @RequestParam(required = false) String location, @RequestParam(required = false) String time) {
 
         Pageable pageable = PageRequest.of(page,10);
 
@@ -105,6 +115,7 @@ public class ReadingController {
         return response;
 
     }
+
 
 
 

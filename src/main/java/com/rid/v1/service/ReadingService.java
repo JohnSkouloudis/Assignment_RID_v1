@@ -4,8 +4,11 @@ import com.rid.v1.entity.Reading;
 import com.rid.v1.entity.Sensor;
 import com.rid.v1.repository.ReadingRepository;
 import com.rid.v1.repository.SensorRepository;
+import com.rid.v1.response.MessageResponse;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +26,7 @@ public class ReadingService {
         this.sensorRepository = sensorRepository;
     }
 
-    public List<Reading> getAllReadings(int sensor_id,Pageable pageable) {
+    public Page<Reading> getAllReadings(int sensor_id, Pageable pageable) {
         Optional<Sensor> sensor = sensorRepository.findById(sensor_id);
 
         if (sensor.isPresent()) {
@@ -32,5 +35,17 @@ public class ReadingService {
 
         return null;
     }
+
+    public  void saveReading(Reading reading,int sensorId) {
+
+        reading.setSensor(sensorRepository.findById(sensorId).get());
+        readingRepository.save(reading);
+
+    }
+
+    public List<Reading> searchReadings(){
+        return null;
+    }
+
 
 }

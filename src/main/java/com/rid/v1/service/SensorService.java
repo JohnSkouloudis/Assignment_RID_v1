@@ -19,10 +19,9 @@ import java.util.Optional;
 @Service
 public class SensorService {
 
-    @Autowired
+
     private final SensorRepository sensorRepository;
 
-    @Autowired
     private final ReadingRepository readingRepository;
 
     public SensorService(SensorRepository sensorRepository, ReadingRepository readingRepository) {

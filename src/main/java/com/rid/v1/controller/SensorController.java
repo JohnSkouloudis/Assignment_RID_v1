@@ -12,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/sensors")
@@ -29,7 +28,7 @@ public class SensorController {
         return sensorService.getAllSensors(pageable);
     }
 
-    @Operation(summary = "get a sensors info")
+    @Operation(summary = "get a sensor's info")
     @GetMapping("{sensor_id}")
     @ResponseBody
     public Sensor getSensor(@PathVariable int sensor_id) {
@@ -47,7 +46,7 @@ public class SensorController {
 
     }
 
-    @Operation(summary = "get a sensors metrics")
+    @Operation(summary = "get a sensor's metrics")
     @GetMapping("/metrics/{sensor_id}")
     @ResponseBody
     public Metrics getSensorMetrics(@PathVariable int sensor_id) {

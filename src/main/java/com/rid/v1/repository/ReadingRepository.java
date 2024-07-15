@@ -3,6 +3,7 @@ package com.rid.v1.repository;
 import com.rid.v1.entity.Reading;
 import com.rid.v1.entity.Sensor;
 import io.swagger.v3.oas.annotations.Hidden;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,7 +22,7 @@ public interface ReadingRepository extends JpaRepository<Reading,Integer> {
 
     List<Reading> findBySensor(Sensor sensor);
 
-    List<Reading> findBySensor(Sensor sensor, Pageable pageable);
+    Page<Reading> findBySensor(Sensor sensor, Pageable pageable);
 
     boolean existsBySensor(Sensor sensor);
 

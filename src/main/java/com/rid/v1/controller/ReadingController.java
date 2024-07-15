@@ -4,13 +4,12 @@ import com.rid.v1.entity.Metrics;
 import com.rid.v1.entity.Reading;
 import com.rid.v1.entity.SensorReadingDTO;
 import com.rid.v1.response.MessageResponse;
-import com.rid.v1.request.SensorReadingRequest;
 import com.rid.v1.repository.ReadingRepository;
 import com.rid.v1.repository.SensorRepository;
-import com.rid.v1.response.SensorReadingResponse;
 import com.rid.v1.service.ReadingService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +21,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/sensorreadings")
+@RequestMapping("/api/readings")
 public class ReadingController {
 
     @Autowired
@@ -35,28 +34,19 @@ public class ReadingController {
     private ReadingService readingService;
 
     @GetMapping("/{sensorId}")
-    public List<Reading> getReadings(@PathVariable int sensorId,@RequestParam int pageNumber) {
-        Pageable pageable = PageRequest.of(pageNumber, 10);
+    public Page<Reading> getReadings(@PathVariable int sensorId, @RequestParam int page) {
+        Pageable pageable = PageRequest.of(page, 10);
         return readingService.getAllReadings(sensorId, pageable);
     }
 
     @Operation(summary = "add a new sensor reading to the database")
     @PostMapping("/new/{sensorId}")
-    public ResponseEntity<MessageResponse> addReading(@RequestBody SensorReadingRequest sensorReadingRequest, @PathVariable int sensorId) {
+    public ResponseEntity<MessageResponse> addReading(@RequestBody Reading reading, @PathVariable int sensorId) {
 
         if (sensorRepository.existsById(sensorId)) {
 
-            Reading reading = new Reading();
-
-            reading.setReadingDate( sensorReadingRequest.getReadingDate() );
-            reading.setReadingType( sensorReadingRequest.getReadingType() );
-            reading.setReadingValue( sensorReadingRequest.getReadingValue() );
-            reading.setDescription( sensorReadingRequest.getDescription() );
-            reading.setReadingDate( sensorReadingRequest.getReadingDate() );
-            reading.setTime(sensorReadingRequest.getTime());
-            reading.setSensor(sensorRepository.findById(sensorId).get());
-
-            readingRepository.save(reading);
+            readingService.saveReading(reading, sensorId);
+            
             return ResponseEntity.ok(new MessageResponse("Sensor Reading Added Successfully"));
 
         }else {
@@ -67,54 +57,7 @@ public class ReadingController {
     }
 
 
-    @Operation(summary = "search sensor reading based on location,time and sensor type")
-    @GetMapping("/search")
-    public SensorReadingResponse SearchReadings(@RequestParam int page, @RequestParam(required = false) String type, @RequestParam(required = false) String location, @RequestParam(required = false) String time) {
 
-        Pageable pageable = PageRequest.of(page,10);
-
-        List<Object[]> results = readingRepository.findSensorReadingBySensor(type, location, time,pageable);
-
-        if (results.isEmpty()){
-            return new SensorReadingResponse();
-        }
-
-        List<SensorReadingDTO> sensorReadings= new ArrayList<>();
-
-        for(Object[] result:results){
-            SensorReadingDTO reading = new SensorReadingDTO();
-            reading.setDescription( (String) result[0]);
-            reading.setReadingDate((String) result[1]);
-            reading.setReadingType((String) result[2]);
-            reading.setReadingValue((double) result[3]);
-            reading.setTime((String) result[4]);
-            sensorReadings.add(reading);
-        }
-
-        List<Double> maxValues = new ArrayList<>();
-        List<Double> minValues =new ArrayList<>();
-
-        double mean=0;
-        for (SensorReadingDTO reading :sensorReadings) {
-             maxValues.add(reading.getReadingValue());
-             minValues.add(reading.getReadingValue());
-            mean+=reading.getReadingValue();
-        }
-
-        mean /= sensorReadings.size();
-
-
-
-        double valueRange= Collections.max(maxValues) - Collections.min(minValues);
-
-        Metrics metrics = new Metrics(valueRange,mean,null,null);
-
-
-        SensorReadingResponse response = new SensorReadingResponse(sensorReadings,metrics);
-
-        return response;
-
-    }
 
 
 

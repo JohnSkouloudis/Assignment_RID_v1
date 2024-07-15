@@ -1,16 +1,15 @@
 package com.rid.v1.service;
 
 import com.rid.v1.entity.Reading;
+import com.rid.v1.entity.ReadingRecord;
 import com.rid.v1.entity.Sensor;
 import com.rid.v1.repository.ReadingRepository;
 import com.rid.v1.repository.SensorRepository;
-import com.rid.v1.response.MessageResponse;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,8 +42,15 @@ public class ReadingService {
 
     }
 
-    public List<Reading> searchReadings(){
-        return null;
+    public List<ReadingRecord> searchReadings(String sensorType,String location,String time,Pageable pageable){
+        List<Object[]> results = readingRepository.findReadingsByParameters(sensorType,location,time,pageable);
+
+        List<ReadingRecord> records = new ArrayList<>();
+        for (Object[] o : results) {
+            ReadingRecord record= new ReadingRecord((int) o[0], (String) o[1], (Double) o[2],(String)o[3],(String)o[4],(String)o[5]);
+            records.add(record);
+        }
+        return records;
     }
 
 

@@ -1,8 +1,7 @@
 package com.rid.v1.controller;
 
-import com.rid.v1.entity.Metrics;
 import com.rid.v1.entity.Reading;
-import com.rid.v1.entity.SensorReadingDTO;
+import com.rid.v1.entity.ReadingRecord;
 import com.rid.v1.response.MessageResponse;
 import com.rid.v1.repository.ReadingRepository;
 import com.rid.v1.repository.SensorRepository;
@@ -15,8 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -46,7 +43,7 @@ public class ReadingController {
         if (sensorRepository.existsById(sensorId)) {
 
             readingService.saveReading(reading, sensorId);
-            
+
             return ResponseEntity.ok(new MessageResponse("Sensor Reading Added Successfully"));
 
         }else {
@@ -56,7 +53,13 @@ public class ReadingController {
 
     }
 
+    @Operation(summary = "search a reading based on location,time and sensor type")
+    @GetMapping("/search")
+    public List<ReadingRecord> search(@RequestParam int page, @RequestParam(required = false) String sensorType, @RequestParam(required = false) String location, @RequestParam(required = false) String time) {
+        Pageable pageable = PageRequest.of(page, 10);
 
+        return readingService.searchReadings(sensorType,location,time,pageable);
+    }
 
 
 

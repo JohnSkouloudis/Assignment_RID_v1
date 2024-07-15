@@ -21,6 +21,8 @@ public interface ReadingRepository extends JpaRepository<Reading,Integer> {
 
     List<Reading> findBySensor(Sensor sensor);
 
+    List<Reading> findBySensor(Sensor sensor, Pageable pageable);
+
     boolean existsBySensor(Sensor sensor);
 
 

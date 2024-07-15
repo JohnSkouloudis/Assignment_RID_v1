@@ -55,6 +55,7 @@ public class SensorService {
 
 
         Optional<Sensor> sensor = sensorRepository.findById(sensorId);
+        Pageable pageable = PageRequest.of(0,10);
 
         if (sensor.isPresent() && readingRepository.existsBySensor( sensor.get() ) ){
             List<Reading> readings = readingRepository.findBySensor(sensor.get());
@@ -69,7 +70,6 @@ public class SensorService {
 
             mean /= readings.size();
 
-            Pageable pageable = PageRequest.of(0,10);
 
             List<Reading> maxSensorReadings = readingRepository.findBySensorOrderByReadingValueDesc(sensor.get(),pageable);
             List<Reading> minSensorReadings = readingRepository.findBySensorOrderByReadingValueAsc(sensor.get(),pageable);

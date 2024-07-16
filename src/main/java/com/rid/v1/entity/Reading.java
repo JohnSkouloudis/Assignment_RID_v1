@@ -2,6 +2,7 @@ package com.rid.v1.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Getter
@@ -18,22 +19,27 @@ public class Reading {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotBlank
     @NonNull
     @Column(name = "readingtype")
     private String readingType;
 
+    @NotBlank
     @NonNull
-    @Column(name = "readingvalue")
-    private double readingValue;
+    @Column(name = "readingvalue",scale = 3)
+    private Double readingValue;
 
+    @NotBlank
     @NonNull
     @Column(name = "readingdate")
     private String readingDate;
 
+    @NotBlank
     @NonNull
     @Column(name = "description")
     private String description;
 
+    @NotBlank
     @NonNull
     @Column(name = "time")
     private String time;

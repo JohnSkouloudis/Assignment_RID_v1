@@ -51,7 +51,7 @@ public class InitiateData {
     public void createSensorReadings(){
 
 
-            Sensor sensor = this.sensorRepository.findById(random.nextInt(SENSOR_COUNT + 1)).get();
+            Sensor sensor = this.sensorRepository.findById(random.nextInt(SENSOR_COUNT )).get();
             List<Reading> readings = new ArrayList<>();
 
             for (int i = 1; i <= 11; i++) {

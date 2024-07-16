@@ -3,6 +3,8 @@ package com.rid.v1.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Getter
@@ -22,9 +24,10 @@ public class Reading {
     @NotBlank
     @NonNull
     @Column(name = "readingtype")
+    @Size(min=4,max=30)
     private String readingType;
 
-    @NotBlank
+    @NotNull
     @NonNull
     @Column(name = "readingvalue",scale = 3)
     private Double readingValue;
@@ -37,6 +40,7 @@ public class Reading {
     @NotBlank
     @NonNull
     @Column(name = "description")
+    @Size(min=4,max=100)
     private String description;
 
     @NotBlank

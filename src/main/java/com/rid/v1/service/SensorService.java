@@ -5,7 +5,6 @@ import com.rid.v1.entity.Reading;
 import com.rid.v1.entity.Sensor;
 import com.rid.v1.repository.ReadingRepository;
 import com.rid.v1.repository.SensorRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -86,8 +85,7 @@ public class SensorService {
 
             double valuesRange = Collections.max(maxValues) - Collections.min(minValues);
 
-            Metrics metrics = new Metrics(valuesRange,mean,maxValues,minValues);
-            return metrics;
+            return new Metrics(valuesRange,mean,maxValues,minValues);
 
 
         }

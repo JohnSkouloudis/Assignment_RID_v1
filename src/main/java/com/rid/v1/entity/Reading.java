@@ -2,7 +2,12 @@ package com.rid.v1.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.*;
 
+@Getter
+@Setter
+@RequiredArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="readings")
 public class Reading {
@@ -13,14 +18,23 @@ public class Reading {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NonNull
     @Column(name = "readingtype")
     private String readingType;
+
+    @NonNull
     @Column(name = "readingvalue")
     private double readingValue;
+
+    @NonNull
     @Column(name = "readingdate")
     private String readingDate;
+
+    @NonNull
     @Column(name = "description")
     private String description;
+
+    @NonNull
     @Column(name = "time")
     private String time;
 
@@ -29,67 +43,7 @@ public class Reading {
     @JoinColumn(name="sensorId")
     private Sensor sensor;
 
-    public Reading(String readingType, double readingValue, String readingDate, String description, String time) {
-        this.readingType = readingType;
-        this.readingValue = readingValue;
-        this.readingDate = readingDate;
-        this.description = description;
-        this.time = time;
 
-    }
-
-         public Reading() {
-
-        }
-
-        public Sensor getSensor() {
-            return sensor;
-        }
-        public void setSensor(Sensor sensor) {
-            this.sensor = sensor;
-        }
-        public int getId() {
-            return id;
-        }
-        public void setId(int id) {
-            this.id = id;
-        }
-        public String getReadingType() {
-            return readingType;
-        }
-        public void setReadingType(String readingType) {
-            this.readingType = readingType;
-        }
-        public double getReadingValue() {
-            return readingValue;
-        }
-        public void setReadingValue(double readingValue) {
-            this.readingValue = readingValue;
-        }
-
-        public String getReadingDate() {
-            return readingDate;
-        }
-
-        public void setReadingDate(String readingDate) {
-            this.readingDate = readingDate;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
-
-        public String getTime() {
-            return time;
-        }
-
-        public void setTime(String time) {
-            this.time = time;
-        }
 
 
 

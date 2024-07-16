@@ -10,10 +10,10 @@ class V1ApplicationTests {
     void contextLoads() {
     }
 
-    @Test
-    public void TestGetSensorMetrics() throws Error, Exception {
 
-    }
+
+
+
 
 
 }

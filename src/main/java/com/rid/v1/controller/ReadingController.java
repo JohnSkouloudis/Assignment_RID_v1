@@ -28,6 +28,7 @@ public class ReadingController {
     @Autowired
     private ReadingService readingService;
 
+    @Operation(summary = "get all readings of a sensor")
     @GetMapping("/{sensorId}")
     public Page<Reading> getReadings(@PathVariable int sensorId, @RequestParam int page) {
         Pageable pageable = PageRequest.of(page, 10);

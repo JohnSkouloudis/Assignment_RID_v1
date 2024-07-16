@@ -3,10 +3,10 @@ package com.rid.v1.controller;
 import com.rid.v1.entity.Reading;
 import com.rid.v1.entity.ReadingRecord;
 import com.rid.v1.response.MessageResponse;
-import com.rid.v1.repository.ReadingRepository;
 import com.rid.v1.repository.SensorRepository;
 import com.rid.v1.service.ReadingService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,7 +36,7 @@ public class ReadingController {
 
     @Operation(summary = "add a new sensor reading to the database")
     @PostMapping("/new/{sensorId}")
-    public ResponseEntity<MessageResponse> addReading(@RequestBody Reading reading, @PathVariable int sensorId) {
+    public ResponseEntity<MessageResponse> addReading(@Valid @RequestBody Reading reading, @PathVariable int sensorId) {
 
         if (sensorRepository.existsById(sensorId)) {
 

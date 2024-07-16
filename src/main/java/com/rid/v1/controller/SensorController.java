@@ -5,6 +5,7 @@ import com.rid.v1.response.MessageResponse;
 import com.rid.v1.entity.Sensor;
 import com.rid.v1.service.SensorService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -38,7 +39,7 @@ public class SensorController {
 
     @Operation(summary = "add a sensor to the database")
     @PostMapping("/new")
-    public ResponseEntity<MessageResponse> addSensor(@RequestBody Sensor sensor) {
+    public ResponseEntity<MessageResponse> addSensor(@Valid @RequestBody Sensor sensor) {
 
         sensorService.saveSensor(sensor);
 

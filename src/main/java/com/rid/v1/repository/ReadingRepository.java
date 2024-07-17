@@ -30,11 +30,11 @@ public interface ReadingRepository extends JpaRepository<Reading,Integer> {
 
 
 
-    @Query(value = "Select sr.id,sr.readingtype,sr.readingvalue,sr.readingdate,sr.description,sr.time from readings sr join sensors s on sr.sensor_id=s.sensor_id "+
-                   "WHERE (:sensortype IS NULL OR s.sensortype = :sensortype) " +
+    @Query(value = "Select new com.rid.v1.entity.ReadingRecord(sr.id,sr.readingType,sr.readingValue,sr.readingDate,sr.description,sr.time) from Reading sr join Sensor s on sr.sensor.sensorId=s.sensorId "+
+                   "WHERE (:sensortype IS NULL OR s.sensorType = :sensortype) " +
                    "AND (:location IS NULL OR s.location = :location) " +
-                   "AND (:time IS NULL OR sr.time = :time)",nativeQuery = true)
-    List<Object[]> findReadingsByParameters(@Param("sensortype") String sensorType,
+                   "AND (:time IS NULL OR sr.time = :time)")
+    List<ReadingRecord> findReadingsByParameters(@Param("sensortype") String sensorType,
                                                   @Param("location")String location,
                                                   @Param("time") String time,
                                                   Pageable pageable);

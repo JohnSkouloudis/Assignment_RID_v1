@@ -43,14 +43,8 @@ public class ReadingService {
     }
 
     public List<ReadingRecord> searchReadings(String sensorType,String location,String time,Pageable pageable){
-        List<Object[]> results = readingRepository.findReadingsByParameters(sensorType,location,time,pageable);
 
-        List<ReadingRecord> records = new ArrayList<>();
-        for (Object[] o : results) {
-            ReadingRecord record= new ReadingRecord((int) o[0], (String) o[1], (Double) o[2],(String)o[3],(String)o[4],(String)o[5]);
-            records.add(record);
-        }
-        return records;
+        return readingRepository.findReadingsByParameters(sensorType,location,time,pageable);
     }
 
 

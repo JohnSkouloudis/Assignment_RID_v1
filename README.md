@@ -53,7 +53,7 @@ mvn spring-boot:run
 
 ## Run Tests(optional)
 ```
-./mvnw test
+.\mvnw test
 ```
 
 ## Endpoints

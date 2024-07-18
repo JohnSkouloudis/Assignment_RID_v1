@@ -71,6 +71,13 @@ mvn spring-boot:run
   "location": "Athens"
   }
    ```
+   - details of each field:
+     - `sensorType`(string,size between 5 and 20): the type of the sensor
+     - `vendorName`(string,size between 3 and 50): the name of the vendor
+     - `vendorEmail`(string,size at least 5): the email of the vendor
+     - `description`(string,size between 4 and 100): a description of the sensor
+     - `location`(string,size between 3 and 100): the location of the sensor
+  -
   
 - `GET /api/sensors/all`: Get all available sensors
    - Query Parameters:
@@ -98,6 +105,12 @@ mvn spring-boot:run
   "time": "15:30"
   } 
   ```
+    - details of each field:
+      - `readingType`(string,size between 5 and 20): the type of the reading
+      - `readingValue`(double): the value of the reading
+      - `readingDate`(string,size between 5 and 20): the date of the reading
+      - `description`(string,size between 4 and 100): a description of the reading
+      - `time`(string,size between 4 and 20): the time of the reading
        
 - `GET /api/readings/{sensor_id}`: Get the readings of a sensor
    - Path Parameters:

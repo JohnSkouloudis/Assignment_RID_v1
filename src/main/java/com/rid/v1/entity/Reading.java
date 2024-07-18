@@ -51,7 +51,7 @@ public class Reading {
     private String time;
 
     @JsonIgnore
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToOne
     @JoinColumn(name="sensorId")
     private Sensor sensor;
 

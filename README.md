@@ -6,6 +6,7 @@ requests for sensor readings of the following 3 types of sensors:
 * Acoustic Sensor
 
 ## Features  
+* Pagination support for large data sets
 * add,view sensors to the main database
 * add,view readings for a specific sensor
 * search for readings

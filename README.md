@@ -64,7 +64,6 @@ mvn spring-boot:run
    - Request Body example:
    ```
   {
-  "sensorId": ,
   "sensorType": "Temperature",
   "vendorName": "John",
   "vendorEmail": "john@gmail.com",
@@ -92,7 +91,6 @@ mvn spring-boot:run
    - Request Body example:
   ```
   {
-  "id": ,
   "readingType": "example",
   "readingValue": 9.8,
   "readingDate": "1/7/2024",

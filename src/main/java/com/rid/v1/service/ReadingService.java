@@ -28,11 +28,12 @@ public class ReadingService {
     public Page<Reading> getAllReadings(int sensor_id, Pageable pageable) {
         Optional<Sensor> sensor = sensorRepository.findById(sensor_id);
 
-        if (sensor.isPresent()) {
+        if (sensor.isPresent() && readingRepository.existsBySensor(sensor.get()) ) {
             return readingRepository.findBySensor(sensor.get(),pageable);
+
         }
 
-        return null;
+        return Page.empty();
     }
 
     public  void saveReading(Reading reading,int sensorId) {

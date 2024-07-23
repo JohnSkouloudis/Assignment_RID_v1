@@ -133,9 +133,9 @@ localhost:9090/swagger-ui/index.html
 
 ## Docker
 ```
-docker run -e DB_URL=127.0.0.1:5432/postgres \
-           -e DB_USERNAME=postgres  \
-           -e DB_PASSWORD=123456 \
+docker run -e DB_URL=YOUR_POSTGRE_URL \
+           -e DB_USERNAME=YOUR_USERNAME  \
+           -e DB_PASSWORD=YOUR_PASSWORD \
            -p 9090:9090 \ 
            springapp
 ```

@@ -132,10 +132,27 @@ localhost:9090/swagger-ui/index.html
 ```
 
 ## Docker
+
+### Pull the image
+
+```
+docker pull ghcr.io/johnskouloudis/assignment_rid_v1:latest
+```
+
+### Run the image
 ```
 docker run -e DB_URL=YOUR_POSTGRE_URL \
            -e DB_USERNAME=YOUR_USERNAME  \
            -e DB_PASSWORD=YOUR_PASSWORD \
            -p 9090:9090 \ 
-           springapp
+           assignment_rid_v1:latest
+```
+### Or use the host.docker.internal for the DB_URL
+
+```
+docker run -e DB_URL=host.docker.internal:5432/YOUR_DATABASE_NAME \
+           -e DB_USERNAME=YOUR_USERNAME  \
+           -e DB_PASSWORD=YOUR_PASSWORD \
+           -p 9090:9090 \
+           assignment_rid_v1:latest
 ```

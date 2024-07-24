@@ -1,4 +1,23 @@
 services:
-  spring:
+  app:
+    container_name: spring_app
+    image: ghcr.io/johnskouloudis/assignment_rid_v1:latest
+    depends_on:
+      - db
+    environment:
+      - DB_USERNAME= ${USERNAME}
+      - DB_PASSWORD= ${PASSWORD}
+      - DB_URL= ${URL}
+    ports:
+      - 9090:9090
+
 
   db:
+    container_name: postgres_db
+    image: postgres:alpine3.20
+    environment:
+        - POSTGRES_PASSWORD= ${PASSWORD}
+    ports:
+      - 8080:5432
+
+

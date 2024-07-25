@@ -156,3 +156,7 @@ docker run -e DB_URL=host.docker.internal:5432/YOUR_DATABASE_NAME \
            -p 9090:9090 \
            assignment_rid_v1:latest
 ```
+### docker-compose
+```
+docker-compose up
+```

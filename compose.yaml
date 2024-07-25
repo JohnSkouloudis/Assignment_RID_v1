@@ -5,18 +5,18 @@ services:
     depends_on:
       - db
     environment:
-      - DB_USERNAME= ${USERNAME}
-      - DB_PASSWORD= ${PASSWORD}
-      - DB_URL= ${URL}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_URL=db:5432/${DB_NAME}
     ports:
       - 9090:9090
-
-
   db:
     container_name: postgres_db
     image: postgres:alpine3.20
     environment:
-        - POSTGRES_PASSWORD= ${PASSWORD}
+        - POSTGRES_USER=${DB_USERNAME}
+        - POSTGRES_PASSWORD=${DB_PASSWORD}
+        - POSTGRES_DB=${DB_NAME}
     ports:
       - 8080:5432
 

@@ -20,6 +20,8 @@ services:
         - POSTGRES_PASSWORD=${DB_PASSWORD}
     ports:
       - 8080:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     healthcheck:
       test:
         - CMD-SHELL
@@ -28,4 +30,6 @@ services:
       timeout: 15s
       retries: 5
 
+volumes:
+    postgres_data:
 

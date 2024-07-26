@@ -7,7 +7,7 @@ services:
     environment:
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
-      - DB_URL=db:5432/${DB_NAME}
+      - DB_URL=db:5432/${DB_USERNAME}
     ports:
       - 9090:9090
 
@@ -17,7 +17,6 @@ services:
     environment:
         - POSTGRES_USER=${DB_USERNAME}
         - POSTGRES_PASSWORD=${DB_PASSWORD}
-        - POSTGRES_DB=${DB_NAME}
     ports:
       - 8080:5432
 

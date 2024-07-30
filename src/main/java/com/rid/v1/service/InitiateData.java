@@ -2,7 +2,6 @@ package com.rid.v1.service;
 
 import com.rid.v1.entity.Reading;
 import com.rid.v1.entity.Sensor;
-import com.rid.v1.repository.ReadingRepository;
 import com.rid.v1.repository.SensorRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
@@ -25,11 +24,11 @@ public class InitiateData {
 
 
     private final SensorRepository sensorRepository;
-    private final ReadingRepository readingRepository;
+    
 
-    public InitiateData(SensorRepository sensorRepository, ReadingRepository readingRepository) {
+    public InitiateData(SensorRepository sensorRepository) {
         this.sensorRepository = sensorRepository;
-        this.readingRepository = readingRepository;
+        
     }
 
 

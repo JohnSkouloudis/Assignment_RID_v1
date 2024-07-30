@@ -16,7 +16,10 @@ pipeline{
         }
 
         stage('Build'){
-            sh 'docker build -t assignment_rid_v1:latest .'
+            steps{
+                sh 'docker build -t assignment_rid_v1:latest .'
+
+            }
         }
 
         stage('Push'){

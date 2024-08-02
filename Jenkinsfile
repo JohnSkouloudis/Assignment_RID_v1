@@ -35,7 +35,7 @@ pipeline{
             steps{
                 withCredentials([usernamePassword(credentialsId: 'my-db-creds', usernameVariable: 'DB_USERNAME', passwordVariable: 'DB_PASSWORD')]) {
                         
-                        sh 'docker-compose up -d'
+                        sh 'docker compose up -d'
                     }
             }
         }

@@ -26,7 +26,7 @@ pipeline{
             steps{
 
                 sh "echo ${DOCKER_TOKEN} | docker login ghcr.io -u ${DOCKER_USER} --password-stdin"
-                sh "docker tag assignment_rid_v1:1.0  ${GHCR_URL}:latest"
+                sh "docker tag assignment_rid_v1:latest  ${GHCR_URL}:latest"
                 sh "docker push ${GHCR_URL}:latest"
             }
         }

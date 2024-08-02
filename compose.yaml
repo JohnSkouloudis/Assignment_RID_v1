@@ -19,7 +19,7 @@ services:
         - POSTGRES_USER=${DB_USERNAME}
         - POSTGRES_PASSWORD=${DB_PASSWORD}
     ports:
-      - 8080:5432
+      - 8081:5432
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:

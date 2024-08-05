@@ -15,6 +15,16 @@ pipeline{
             }
         }
 
+        stage('SonarQube'){
+            steps{
+                withSonarQubeEnv('sonarqube') {
+                    sh'chmod +x mvnw'
+                    sh'./mvnw clean install'
+                    sh './mvnw sonar:sonar'
+                }
+            }
+        }
+
         stage('Build'){
             steps{
                 sh 'docker build -t assignment_rid_v1:latest .'

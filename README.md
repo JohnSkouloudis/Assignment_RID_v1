@@ -51,11 +51,6 @@ cd Assignment_RID_v1
 mvn spring-boot:run
 ```
 
-## Run Tests(optional)
-```
-.\mvnw test
-```
-
 ## Endpoints
 
 ### Sensor Endpoints

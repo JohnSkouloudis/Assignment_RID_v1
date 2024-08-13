@@ -26,7 +26,7 @@ git clone https://github.com/JohnSkouloudis/Assignment_RID_v1.git
 cd Assignment_RID_v1
 ```
 * Update the application.properties to match your database
-* Update the username,password,url
+* Update the username,password,url or use a .env file
 ```
   spring.application.name=v1
 
@@ -49,11 +49,6 @@ cd Assignment_RID_v1
 * Start Spring
 ```
 mvn spring-boot:run
-```
-
-## Run Tests(optional)
-```
-.\mvnw test
 ```
 
 ## Endpoints

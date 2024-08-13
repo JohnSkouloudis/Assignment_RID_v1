@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/sensors")
+@CrossOrigin(origins = "*")
 public class SensorController {
 
    @Autowired

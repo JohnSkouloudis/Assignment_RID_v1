@@ -19,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/readings")
+@CrossOrigin(origins = "*")
 public class ReadingController {
 
 

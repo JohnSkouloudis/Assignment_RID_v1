@@ -55,7 +55,7 @@ public class ReadingController {
 
     @Operation(summary = "search a reading based on location,time and sensor type")
     @GetMapping("/search")
-    public List<ReadingRecord> search(@RequestParam int page, @RequestParam(required = false) String sensorType, @RequestParam(required = false) String location, @RequestParam(required = false) String time) {
+    public Page<ReadingRecord> search(@RequestParam int page, @RequestParam(required = false) String sensorType, @RequestParam(required = false) String location, @RequestParam(required = false) String time) {
         Pageable pageable = PageRequest.of(page, 10);
 
         return readingService.searchReadings(sensorType,location,time,pageable);

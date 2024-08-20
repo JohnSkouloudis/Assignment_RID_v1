@@ -43,7 +43,7 @@ public class ReadingService {
 
     }
 
-    public List<ReadingRecord> searchReadings(String sensorType,String location,String time,Pageable pageable){
+    public Page<ReadingRecord> searchReadings(String sensorType,String location,String time,Pageable pageable){
 
         return readingRepository.findReadingsByParameters(sensorType,location,time,pageable);
     }

@@ -34,7 +34,7 @@ public interface ReadingRepository extends JpaRepository<Reading,Integer> {
                    "WHERE (:sensortype IS NULL OR s.sensorType = :sensortype) " +
                    "AND (:location IS NULL OR s.location = :location) " +
                    "AND (:time IS NULL OR sr.time = :time)")
-    List<ReadingRecord> findReadingsByParameters(@Param("sensortype") String sensorType,
+    Page<ReadingRecord> findReadingsByParameters(@Param("sensortype") String sensorType,
                                                   @Param("location")String location,
                                                   @Param("time") String time,
                                                   Pageable pageable);

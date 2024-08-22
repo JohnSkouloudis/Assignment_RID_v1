@@ -1,5 +1,16 @@
 services:
-  app:
+  vue:
+    container_name: vue_app
+    image: ghcr.io/johnskouloudis/assignment_rid_v1_frontend:latest
+    depends_on:
+      spring:
+        condition: service_started
+    environment:
+      - VITE_BACKEND_URL=spring:9090
+    ports:
+      - 8080:5173
+
+  spring:
     container_name: spring_app
     image: ghcr.io/johnskouloudis/assignment_rid_v1:latest
     depends_on:
